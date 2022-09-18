@@ -243,7 +243,7 @@ public class SetupDialog extends JDialog{
     }
 
     private void initDialog() {
-        setTitle(GUIString.FORMATION_SETUP_TITLE);
+        setTitle(GUIString.SETUP_TITLE);
 
         setAlwaysOnTop(true);
         setLayout(new BorderLayout(GUIValue.SETUP_MARGIN, GUIValue.SETUP_MARGIN));
@@ -268,7 +268,7 @@ public class SetupDialog extends JDialog{
                 }
 
                 Setup.getInstance().loadSetup(getFilePath());
-                if (Setup.getInstance().isLoaded()) {
+                if (Setup.getInstance().isRobotexLoaded()) {
                     StringBuilder msg = new StringBuilder(GUIString.EXCEL_LOAD_MSG + getFilePath());
                     for (Sections s : Setup.getInstance().getStatus().keySet()) {
                         if (Setup.getInstance().getStatus().get(s)) {
@@ -292,7 +292,12 @@ public class SetupDialog extends JDialog{
                     btnExcelLoad.setEnabled(false);
                 }
                 else {
-                    AlertDialog.showAlertDialog(getSetupDialog(), ErrorCode.Robotex_Sheet_Not_Loaded.msg, ErrorCode.Robotex_Sheet_Not_Loaded.code);
+                    if (Setup.getInstance().isRobotexFounded()) {
+                        AlertDialog.showAlertDialog(getSetupDialog(), ErrorCode.Robotex_Sheet_Wrong_Value.msg, ErrorCode.Robotex_Sheet_Wrong_Value.code);
+                    }
+                    else {
+                        AlertDialog.showAlertDialog(getSetupDialog(), ErrorCode.Robotex_Sheet_Not_Loaded.msg, ErrorCode.Robotex_Sheet_Not_Loaded.code);
+                    }
                 }
             }
             else if (obj == btnOK) {

@@ -23,8 +23,9 @@ public class ExcelReadManager {
     Map<Sections, Boolean> dataLoaded = new HashMap<>();
     SetupDataModel userValues = null;
 
-    boolean fullDataSheetsLoaded;
-    boolean userValueSheetLoaded;
+    boolean fullDataSheetsLoaded = false;
+    boolean userValueSheetLoaded = false;
+    boolean foundRobotexSheet = false;
 
     Workbook workbook;
     InputStream is;
@@ -84,6 +85,7 @@ public class ExcelReadManager {
                     settingSheetIndex = i;
                     availableIndex.add(i);
                     availableSettingSheetNum++;
+                    foundRobotexSheet = true;
                     continue;
                 }
 
@@ -95,7 +97,7 @@ public class ExcelReadManager {
                 fullDataSheetsLoaded = false;
             }
         }
-
+        // Can not find Robotex Sheet
         if (availableSettingSheetNum != 1) {
             userValueSheetLoaded = false;
             return;
@@ -188,5 +190,9 @@ public class ExcelReadManager {
 
     public boolean isUserValueSheetLoaded() {
         return userValueSheetLoaded;
+    }
+
+    public boolean isFoundRobotexSheet() {
+        return foundRobotexSheet;
     }
 }

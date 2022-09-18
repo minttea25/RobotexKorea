@@ -89,7 +89,7 @@ public class MainFrame extends JFrame {
                 dialog.showDialog();
             }
             // 엑셀 파일이 아직 로드 되지 않았을 때
-            else if (!Setup.getInstance().isLoaded()) {
+            else if (!Setup.getInstance().isRobotexLoaded()) {
                 JOptionPane.showConfirmDialog(
                         getMainFrame(),
                         ErrorCode.Excel_Not_Loaded.msg,

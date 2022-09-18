@@ -22,7 +22,8 @@ import java.util.concurrent.Future;
 public class Setup {
     private static Setup Instance = null;
     SetupDataModel setupData;
-    boolean loaded = false;
+    boolean robotexLoaded = false;
+    boolean robotexFounded = false;
     boolean cannotFindFile = true;
     Map<Sections, List<TeamModel>> teamData;
     Map<Sections, Map<Integer, List<TeamModel>>> entryMaps = new HashMap<>();
@@ -49,7 +50,7 @@ public class Setup {
         ticketMaps.clear();
         status.clear();
         writeStatus.clear();
-        loaded = false;
+        robotexLoaded = false;
         cannotFindFile = true;
 
         File file = new File(filePath);
@@ -63,20 +64,28 @@ public class Setup {
         erm.loadFile();
 
         if (erm.getData() == null || erm.getData().size() == 0) {
-            loaded = false;
+            robotexLoaded = false;
         }
         else {
             teamData = erm.getData();
-            loaded = true;
+            robotexLoaded = true;
         }
 
-        if (erm.isUserValueSheetLoaded()) {
-            setupData = erm.getUserValues();
-            loaded = true;
+        if (erm.isFoundRobotexSheet()) {
+            robotexFounded = true;
+            if (erm.isUserValueSheetLoaded()) {
+                setupData = erm.getUserValues();
+                robotexLoaded = true;
+            }
+            else {
+                robotexLoaded = false;
+            }
         }
         else {
-            loaded = false;
+            robotexFounded = false;
         }
+
+
     }
 
     private void saveFilesFormation() {
@@ -289,8 +298,8 @@ public class Setup {
         }
     }
 
-    public boolean isLoaded() {
-        return loaded;
+    public boolean isRobotexLoaded() {
+        return robotexLoaded;
     }
 
     public boolean isCannotFindFile() {
@@ -319,6 +328,10 @@ public class Setup {
 
     public Map<Sections, Boolean> getWriteStatus() {
         return writeStatus;
+    }
+
+    public boolean isRobotexFounded() {
+        return robotexFounded;
     }
 
     public List<TeamModel> getTeamDataBySection(Sections section) {

@@ -5,8 +5,7 @@ public class GUIString {
     public static final String MAIN_FRAME_TITLE = "Robotex Korea";
     public static final String FORMATION_FRAME_TITLE = "Robotex Korea - Formation";
     public static final String TICKET_FRAME_TITLE = "Robotex Korea - World Ticket";
-    public static final String FORMATION_SETUP_TITLE = "Setup - Formation";
-    public static final String TICKET_SETUP_TITLE = "Setup - Ticket";
+    public static final String SETUP_TITLE = "Setup";
 
     // for setup dialog
     public static final String LOAD = "Load Data";
