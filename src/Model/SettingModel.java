@@ -9,6 +9,14 @@ public class SettingModel {
     String FORMATION_SAVE_DIR;
     String TICKET_SAVE_DIR;
 
+    String LEGO_SUMO_1KG_TEAM_NUMBER_PREFIX;
+    String LEGO_SUMO_3KG_TEAM_NUMBER_PREFIX;
+    String LEGO_LINE_E_TEAM_NUMBER_PREFIX;
+    String LEGO_LINE_JH_TEAM_NUMBER_PREFIX;
+    String LEGO_FOLK_E_TEAM_NUMBER_PREFIX;
+    String LEGO_FOLK_JH_TEAM_NUMBER_PREFIX;
+    String ROBO_LEAGUE_TEAM_NUMBER_PREFIX;
+
     int LEGO_SUMO_1KG_FORMATION_CELL_X;
     int LEGO_SUMO_1KG_FORMATION_CELL_Y;
     int LEGO_SUMO_1KG_TICKET_CELL_X;
@@ -69,6 +77,34 @@ public class SettingModel {
 
     public String getTICKET_SAVE_DIR() {
         return TICKET_SAVE_DIR;
+    }
+
+    public String getLEGO_FOLK_E_TEAM_NUMBER_PREFIX() {
+        return LEGO_FOLK_E_TEAM_NUMBER_PREFIX;
+    }
+
+    public String getLEGO_FOLK_JH_TEAM_NUMBER_PREFIX() {
+        return LEGO_FOLK_JH_TEAM_NUMBER_PREFIX;
+    }
+
+    public String getLEGO_LINE_E_TEAM_NUMBER_PREFIX() {
+        return LEGO_LINE_E_TEAM_NUMBER_PREFIX;
+    }
+
+    public String getLEGO_LINE_JH_TEAM_NUMBER_PREFIX() {
+        return LEGO_LINE_JH_TEAM_NUMBER_PREFIX;
+    }
+
+    public String getLEGO_SUMO_1KG_TEAM_NUMBER_PREFIX() {
+        return LEGO_SUMO_1KG_TEAM_NUMBER_PREFIX;
+    }
+
+    public String getLEGO_SUMO_3KG_TEAM_NUMBER_PREFIX() {
+        return LEGO_SUMO_3KG_TEAM_NUMBER_PREFIX;
+    }
+
+    public String getROBO_LEAGUE_TEAM_NUMBER_PREFIX() {
+        return ROBO_LEAGUE_TEAM_NUMBER_PREFIX;
     }
 
     public int getLEGO_FOLK_E_FORMATION_CELL_X() {

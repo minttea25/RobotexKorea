@@ -3,6 +3,7 @@ package Setup;
 import ConstantValues.Constants;
 import ConstantValues.FormationOrTicket;
 import ConstantValues.Sections;
+import ConstantValues.SettingValues;
 import Excel.ExcelReadManager;
 import Excel.SheetWriteFormation;
 import Excel.SheetWriteTicket;
@@ -187,6 +188,9 @@ public class Setup {
     }
 
     public void saveFiles() {
+        // It should be called before 'shuffleData()'
+        setTeamNumber_RoboLeague();
+
         shuffleData();
 
         saveFilesFormation();
@@ -224,6 +228,7 @@ public class Setup {
         }
     }
 
+    // contains setting team number at team depend on formation
     private void SetFormation() {
         for (Sections s : teamData.keySet()) {
             // Formation 은 roboleague 없음!
@@ -232,12 +237,12 @@ public class Setup {
             }
             String teamNumber = "";
             switch (s) {
-                case LegoSumo1kg: teamNumber = "Sumo1-"; break;
-                case LegoSumo3kg: teamNumber = "Sumo3-"; break;
-                case LineFollowingE: teamNumber = "LineE-"; break;
-                case LineFollowingJH: teamNumber = "LineJH-"; break;
-                case LegoFolkraceE: teamNumber = "FolkE-"; break;
-                case LegoFolkraceJH: teamNumber = "FolkJH-"; break;
+                case LegoSumo1kg: teamNumber = SettingValues.getInstance().getData().getLEGO_SUMO_1KG_TEAM_NUMBER_PREFIX(); break;
+                case LegoSumo3kg: teamNumber = SettingValues.getInstance().getData().getLEGO_SUMO_3KG_TEAM_NUMBER_PREFIX(); break;
+                case LineFollowingE: teamNumber = SettingValues.getInstance().getData().getLEGO_LINE_E_TEAM_NUMBER_PREFIX(); break;
+                case LineFollowingJH: teamNumber = SettingValues.getInstance().getData().getLEGO_LINE_JH_TEAM_NUMBER_PREFIX(); break;
+                case LegoFolkraceE: teamNumber = SettingValues.getInstance().getData().getLEGO_FOLK_E_TEAM_NUMBER_PREFIX(); break;
+                case LegoFolkraceJH: teamNumber = SettingValues.getInstance().getData().getLEGO_FOLK_JH_TEAM_NUMBER_PREFIX(); break;
             }
 
             entryMaps.put(s, new HashMap<>());
@@ -250,7 +255,12 @@ public class Setup {
             int t = 1;
             char c = 'A';
             for (TeamModel team : teamData.get(s)) {
-                team.setTeamNumber(teamNumber + (char)(c+i) + "-" + t);
+                if (t >=10) {
+                    team.setTeamNumber(teamNumber + "_" + (char)(c+i) + "_" + t);
+                }
+                else {
+                    team.setTeamNumber(teamNumber + "_" + (char)(c+i) + "_0" + t);
+                }
 
                 entryMaps.get(s).get(i).add(team);
                 if (i >= entryMaps.get(s).size() - 1) {
@@ -276,6 +286,7 @@ public class Setup {
             if (!status.get(s)) {
                 continue;
             }
+
             ticketMaps.put(s, new HashMap<>());
             int num = setupData.getValue(FormationOrTicket.Ticket, s);
             ticketMaps.get(s).put(0, new ArrayList<>());
@@ -295,6 +306,23 @@ public class Setup {
                     ticketMaps.get(s).get(2).add(teamData.get(s).get(i));
                 }
             }
+        }
+    }
+
+    // It should be called before shuffled
+    public void setTeamNumber_RoboLeague() {
+        // robo league team number setting
+        String teamNumber = SettingValues.getInstance().getData().getROBO_LEAGUE_TEAM_NUMBER_PREFIX();
+        char c = 'A';
+        int i =1;
+        for (TeamModel m : teamData.get(Sections.RoboLeague)) {
+            if (i >= 10) {
+                m.setTeamNumber(teamNumber + "_" + c + "_" + i);
+            }
+            else {
+                m.setTeamNumber(teamNumber + "_" + c + "_0" + i);
+            }
+            i++;
         }
     }
 
