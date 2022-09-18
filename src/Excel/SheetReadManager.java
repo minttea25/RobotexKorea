@@ -73,13 +73,13 @@ public class SheetReadManager extends AExcelReadManager implements Callable {
                             team.setMentorPhone(String.valueOf(getValueFromCell(cell)));
                             break;
 
-                        case 6, 9, 12, 15, 18: // Member1 name
+                        case 6: case 9: case 12: case 15: case 18: // Member1 name
                             mName = String.valueOf(getValueFromCell(cell));
                             break;
-                        case 7, 10, 13, 16, 19: // Member1 school
+                        case 7: case 10: case 13: case 16: case 19: // Member1 school
                             mSchool = String.valueOf(getValueFromCell(cell));
                             break;
-                        case 8, 11, 14, 17, 20: // Member1 grade
+                        case 8: case 11: case 14: case 17: case 20: // Member1 grade
                             mGrade = String.valueOf(getValueFromCell(cell));
                             members.add(new Member(mName, mSchool, mGrade));
                             break;
