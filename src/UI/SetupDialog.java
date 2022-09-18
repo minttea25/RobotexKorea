@@ -1,6 +1,7 @@
 package UI;
 
 import ConstantValues.*;
+import Model.SetupDataModel;
 import Setup.Setup;
 import Utils.AlertDialog;
 import Utils.ExcelFileChooser;
@@ -61,6 +62,8 @@ public class SetupDialog extends JDialog{
         initComponents();
 
         attachComponents();
+
+        ResetValues();
     }
 
     private void attachComponents() {
@@ -280,6 +283,9 @@ public class SetupDialog extends JDialog{
                             GUIString.NOTICE,
                             JOptionPane.INFORMATION_MESSAGE
                     );
+
+                    ShowLoadedValues();
+
                     btnOK.setEnabled(true);
                     btnOK.setToolTipText(null);
                     btnExcelLoad.setText(GUIString.LOADED);
@@ -317,6 +323,43 @@ public class SetupDialog extends JDialog{
                 }
             }
         }
+    }
+
+    private void ShowLoadedValues() {
+        SetupDataModel v = Setup.getInstance().getSetupData();
+
+        labelFormationLegoSumo1kg.setText(String.valueOf(v.getFormation_LegoSumo1kg()));
+        labelFormationLegoSumo3kg.setText(String.valueOf(v.getFormation_LegoSumo3kg()));
+        labelFormationLineFollowingE.setText(String.valueOf(v.getFormation_LineFollowingE()));
+        labelFormationLineFollowingJH.setText(String.valueOf(v.getFormation_LineFollowingJH()));
+        labelFormationFolkraceE.setText(String.valueOf(v.getFormation_FolkraceE()));
+        labelFormationFolkraceJH.setText(String.valueOf(v.getFormation_FolkraceJH()));
+
+        labelTicketLegoSumo1kg.setText(String.valueOf(v.getTicket_LegoSumo1kg()));
+        labelTicketLegoSumo3kg.setText(String.valueOf(v.getTicket_LegoSumo3kg()));
+        labelTicketLineFollowingE.setText(String.valueOf(v.getTicket_LineFollowingE()));
+        labelTicketLineFollowingJH.setText(String.valueOf(v.getTicket_LineFollowingJH()));
+        labelTicketFolkraceE.setText(String.valueOf(v.getTicket_FolkraceE()));
+        labelTicketFolkraceJH.setText(String.valueOf(v.getTicket_FolkraceJH()));
+        labelTicketRoboleague.setText(String.valueOf(v.getTicket_RoboLeague()));
+    }
+
+    private void ResetValues() {
+
+        labelFormationLegoSumo1kg.setText("-");
+        labelFormationLegoSumo3kg.setText("-");
+        labelFormationLineFollowingE.setText("-");
+        labelFormationLineFollowingJH.setText("-");
+        labelFormationFolkraceE.setText("-");
+        labelFormationFolkraceJH.setText("-");
+
+        labelTicketLegoSumo1kg.setText("-");
+        labelTicketLegoSumo3kg.setText("-");
+        labelTicketLineFollowingE.setText("-");
+        labelTicketLineFollowingJH.setText("-");
+        labelTicketFolkraceE.setText("-");
+        labelTicketFolkraceJH.setText("-");
+        labelTicketRoboleague.setText("-");
     }
 
     private void selectFile() {
