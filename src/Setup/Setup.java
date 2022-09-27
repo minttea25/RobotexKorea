@@ -194,6 +194,8 @@ public class Setup {
         shuffleData();
 
         saveFilesFormation();
+
+        shuffleData();
         saveFilesTicket();
     }
 
